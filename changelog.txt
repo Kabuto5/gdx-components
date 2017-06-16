@@ -1,0 +1,81 @@
+Only major changes and changes which may require modifications of existing code are logged here. This rule may be ignored if a developer is feeling very enthusiastic.
+
+2016/1/4
+Refactoring:
+  GdxComponent has been renamed to GdxAbstractComponent.
+  GdxComponent is now an interface.
+  GdxAbstractComponent now implements GdxComponent.
+  GdxContainer has been renamed to GdxPlainContainer.
+  GdxContainer is now an interface.
+  Added GdxAbstractContainer to serve as basic template for possible alternative containers.
+  GdxAbstractContainer now implements GdxContainer interface.
+  GdxPlainContainer now extends GdxAbstractContainer.
+  Some classes now uses enums for attributes instead of integer constants.
+Changed behavior:
+  GdxPlainContainer now returns collection of components in order of their addition from earliest to latest, rather than in reverse. This also changes effects of certain layouts so that firstly added components tend to appear on left and/or top, which is more to be expected.
+  GdxBorderLayout now ignores components which weren't specifically set to be aligned, instead of clumping then in the middle, and only one component can be set to be aligned on the center.
+  
+2016/1/5
+Changed methods:
+  getPainter() of GdxComponent removed - No known usage, bad practice, probably remnant from early tests.
+  MultiTouch in names of GdxInputManager's methods changed to Multitouch.
+  
+2016/2/7
+New classes:
+  GdxAssets introduced as a globally accessible asset storage.
+  GdxLayer and GdxLayerContainer now provides a framework to manage multiple screens in application (similary to android activities and fragments).
+Refactoring:
+  Storing fonts in GdxPainter deprecated (use GdxAssets instead).
+  GdxAbstractDraggableComponent now has a corresponding interface (which it really should have had from the very beginning).
+Changed methods:
+  GdxLabel modified to work with GdxAssets instead of GdxPainter as font storage.
+
+2016/5/4
+Changed methods:
+  subColor methods of GdxPainter are no longer wrongly called aubColor.
+  
+2016/5/7
+Refactoring:
+  GdxLinearLayout now uses a new parameter class Alignment to set alignment rather than a flag field. Old constructors have been deprecated.
+Changed methods:
+  setAlignment() and getAlignment() methods of GdxLinearLayout now uses Alignment object as a value, rather than a flag field.
+  
+2016/5/12
+Refactoring:
+  onTouchEvent() method is now deprecated and have been replaced by individual methods for each event.
+  GdxDraggableComponent and GdxAbstractDraggableComponent were renamed to GdxDragDropComponent and GdxAbstractDragDropComponent.
+Changed behavior:
+  Using old onTouchEvent() method along with GdxActiveComponent may lead to unexpected behavior, since GdxActiveComponent's state is now updated before onTouchEvent() is even called. However, GdxActiveComponent now provides onPressed(), onReleased(), onStartDrag() and onStopDrag() methods to handle those state changes more clearly.
+  
+2016/5/2
+Changed methods:
+  requestTextureRender() method no longer takes clearColor as parameter. Instead, it always uses transparent color to clear framebuffer.
+  
+2016/7/9
+Refactoring:
+  Multi-tapping is no longed supported by GdxActiveComponent. Instead, it's handled directly by GdxInputManager.
+  GdxSwitch now allows clearly named enum values instead of boolean values for several parameters in its constructors, in order to avoid confusion. Old constructors have been deprecated.
+Changed methods:
+  onTap() method now receives a number of consecutive taps as its new parameter (starting from 1). If onTap() method returns false, it will receive an event of subsequent consecutive tap (if such occurs) with tap counter further increased. If it returns true, it signals that the current number of consecutive taps has been processed as a valid input and the counter should be reset.
+  requestTextureRender() methods accepts clearColor as parameter again for optimization purposes.
+  
+2016/7/10
+Changed methods:
+  Storing fonts via GdxPainter no longer possible (deprecated methods removed).
+  
+2016/7/16
+Changed methods:
+  popClippingArea() of GdxPainter no longer returns a Rectangle, because the returned value was invalid and fixing it will be too expensive, considering it has no known use.
+  
+2016/7/19
+Changed methods:
+  getPacked() and setPacked() methods of GdxGridLayout are now called isWrapContent() and setWrapContent() for better descriptiveness.
+  
+2016/9/10
+Refactoring:
+  GdxPainter interface no longer extends a Batch interface, though takes over some of its methods.
+  GdxPainter2D now encapsulates, rather than extends, a SpriteBatch, and no longer satisfies Batch nor SpriteBatch interface, though takes over some of its methods.
+  
+2016/9/16
+Refactoring:
+  Implementation of listeners within all components was simplified. Names of the listeners and names of respective methods were changed to be more descriptive. Any components inheriting from abstract components must now specifically expose inherited listener methods to provide them for use.
