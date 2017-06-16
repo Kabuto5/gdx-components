@@ -21,3 +21,7 @@ As to this library itself, you should be able to just put it in your project to 
 ## Some legal info
 
 This library is provided as is for any kind of use, with fairly limited chances of support. Some parts are known to be incomplete and/or not working as intended. The author does not take responsibility for any resulting damage.
+
+## Thanks to
+
+Thanks to libGDX community for making cross platform OpenGL easy and accesible for those of us who don't speak assembler.
