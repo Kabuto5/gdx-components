@@ -24,4 +24,4 @@ This library is provided as is for any kind of use, with fairly limited chances 
 
 ## Thanks to
 
-Thanks to libGDX community for making cross platform OpenGL easy and accesible for those of us who don't speak assembler.
+Thanks to libGDX community for making cross platform OpenGL easy and accessible for those of us who don't speak assembler.
